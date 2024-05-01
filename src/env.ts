@@ -9,7 +9,6 @@ export const env = createEnv({
    */
   isServer: typeof window === "undefined",
   server: {
-    MAPBOX_ACCESS_TOKEN: z.string().startsWith("pk."),
     MAPBOX_USERNAME: z.string().min(1),
   },
   /*
@@ -17,7 +16,9 @@ export const env = createEnv({
    *
    * 💡 You'll get type errors if these are not prefixed with NEXT_PUBLIC_.
    */
-  client: {},
+  client: {
+    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN: z.string().startsWith("pk."),
+  },
   /*
    * Due to how Next.js bundles environment variables on Edge and Client,
    * we need to manually destructure them to make sure all are included in bundle.
@@ -25,7 +26,8 @@ export const env = createEnv({
    * 💡 You'll get type errors if not all variables from `server` & `client` are included here.
    */
   runtimeEnv: {
-    MAPBOX_ACCESS_TOKEN: process.env.MAPBOX_ACCESS_TOKEN,
+    NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN:
+      process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN,
     MAPBOX_USERNAME: process.env.MAPBOX_USERNAME,
   },
 });
