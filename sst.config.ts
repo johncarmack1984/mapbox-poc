@@ -9,8 +9,10 @@ export default $config({
     };
   },
   async run() {
+    const { getDomain } = await import("./src/lib/domain");
+
     new sst.aws.Nextjs("MyWeb", {
-      domain: "mapbox.johncarmack.com",
+      domain: getDomain($app.stage),
     });
   },
 });
